@@ -1,10 +1,8 @@
 streamlit
 numpy>=1.23
-spacy==3.6.0
-thinc==8.1.8
+torch
 scikit-learn
 transformers
 chardet
 PyPDF2
 sentence-transformers
-en-core-web-sm @ https://github.com/explosion/spacy-models/releases/download/en_core_web_sm-3.6.0/en_core_web_sm-3.6.0.tar.gz
