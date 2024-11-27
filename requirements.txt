@@ -1,5 +1,5 @@
 spacy==3.6.0
-thinc==8.1.0
+thinc==8.1.8
 scikit-learn
 torch
 transformers
