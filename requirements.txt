@@ -1,0 +1,8 @@
+scikit-learn
+spacy
+torch
+transformers
+chardet
+PyPDF2
+sentence-transformers
+streamlit

@@ -1,0 +1,8 @@
+Fetch Location
+Job Title
+train on Job data 
+Remove dupliactes from all sections
+model
+en_core_web_sm
+"sentence-transformers/all-MiniLM-L6-v2"
+"sshleifer/distilbart-cnn-12-6"
