@@ -1,5 +1,4 @@
-python==3.11
-spacy==3.5.3
+spacy==3.6.0
 thinc==8.1.0
 scikit-learn
 torch
@@ -8,5 +7,4 @@ chardet
 PyPDF2
 sentence-transformers
 streamlit
-spacy==3.5.3; python_version < "3.12"
 en-core-web-sm @ https://github.com/explosion/spacy-models/releases/download/en_core_web_sm-3.6.0/en_core_web_sm-3.6.0.tar.gz
