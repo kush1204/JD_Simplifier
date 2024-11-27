@@ -3,7 +3,6 @@ numpy>=1.23
 spacy==3.6.0
 thinc==8.1.8
 scikit-learn
-torch
 transformers
 chardet
 PyPDF2
