@@ -155,7 +155,6 @@ import streamlit as st
 from transformers import AutoTokenizer, AutoModelForSeq2SeqLM, AutoModel
 from sklearn.metrics.pairwise import cosine_similarity
 from PyPDF2 import PdfReader
-import torch
 import chardet
 import spacy
 from spacy.matcher import PhraseMatcher
