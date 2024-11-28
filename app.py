@@ -28,26 +28,26 @@ similarity_model = AutoModel.from_pretrained(similarity_model_name, cache_dir=mo
 
 # Load spaCy NER model
 
-# def load_spacy_model():
-#     try:
-#         nlp = spacy.load("en_core_web_sm")
-#     except OSError:
-#         # Install the model if it's not already installed
-#         subprocess.run(["python", "-m", "spacy", "download", "en_core_web_sm"], check=True)
-#         nlp = spacy.load("en_core_web_sm")
-#     return nlp
-
-# Load spaCy NER model from local directory
 def load_spacy_model():
-    model_path = Path("./models/en_core_web_sm")
-
-    # Check if the model exists in the specified directory
-    if not model_path.exists():
-        raise FileNotFoundError(f"Model not found in {model_path}. Please upload the model directory.")
-    
-    # Load the model from the local directory
-    nlp = spacy.load(model_path)
+    try:
+        nlp = spacy.load("./models/en_core_web_sm")
+    except OSError:
+        # Install the model if it's not already installed
+        subprocess.run(["python", "-m", "spacy", "download", "en_core_web_sm"], check=True)
+        nlp = spacy.load("en_core_web_sm")
     return nlp
+
+# # Load spaCy NER model from local directory
+# def load_spacy_model():
+#     model_path = Path("./models/en_core_web_sm")
+
+#     # Check if the model exists in the specified directory
+#     if not model_path.exists():
+#         raise FileNotFoundError(f"Model not found in {model_path}. Please upload the model directory.")
+    
+#     # Load the model from the local directory
+#     nlp = spacy.load(model_path)
+#     return nlp
 
 
 nlp = load_spacy_model()
