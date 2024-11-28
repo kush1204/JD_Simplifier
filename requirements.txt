@@ -1,10 +1,12 @@
-streamlit
-numpy>=1.23
-torch
-scikit-learn
-transformers
-chardet
-PyPDF2
-sentence-transformers
 spacy==3.6.1
+streamlit>=1.20.0
+numpy==1.24.3
+torch==2.0.1
+scikit-learn>=1.2.0
+transformers==4.34.0
+chardet==5.1.0
+PyPDF2>=3.0.0
+sentence-transformers>=2.2.0
+spacy==3.6.1
+
 
