@@ -28,14 +28,14 @@ similarity_model = AutoModel.from_pretrained(similarity_model_name, cache_dir=mo
 
 # Load spaCy NER model
 
-def load_spacy_model():
-    try:
-        nlp = spacy.load("./models/en_core_web_sm")
-    except OSError:
-        # Install the model if it's not already installed
-        subprocess.run(["python", "-m", "spacy", "download", "en_core_web_sm"], check=True)
-        nlp = spacy.load("en_core_web_sm")
-    return nlp
+# def load_spacy_model():
+#     try:
+#         nlp = spacy.load("./models/en_core_web_sm")
+#     except OSError:
+#         # Install the model if it's not already installed
+#         subprocess.run(["python", "-m", "spacy", "download", "en_core_web_sm"], check=True)
+#         nlp = spacy.load("en_core_web_sm")
+#     return nlp
 
 # # Load spaCy NER model from local directory
 # def load_spacy_model():
@@ -50,7 +50,7 @@ def load_spacy_model():
 #     return nlp
 
 
-nlp = load_spacy_model()
+# nlp = load_spacy_model()
 
 
 
@@ -75,43 +75,43 @@ def extract_text(file):
     return text
 
 # Extract details using spaCy and phrase matcher
-def extract_with_ner(jd_text):
-    doc = nlp(jd_text)
-    matcher = PhraseMatcher(nlp.vocab, attr="LOWER")
+# def extract_with_ner(jd_text):
+#     doc = nlp(jd_text)
+#     matcher = PhraseMatcher(nlp.vocab, attr="LOWER")
 
-    skill_patterns = [nlp.make_doc(text) for text in SKILL_KEYWORDS]
-    experience_patterns = [nlp.make_doc(text) for text in EXPERIENCE_KEYWORDS]
-    responsibility_patterns = [nlp.make_doc(text) for text in RESPONSIBILITY_KEYWORDS]
+#     skill_patterns = [nlp.make_doc(text) for text in SKILL_KEYWORDS]
+#     experience_patterns = [nlp.make_doc(text) for text in EXPERIENCE_KEYWORDS]
+#     responsibility_patterns = [nlp.make_doc(text) for text in RESPONSIBILITY_KEYWORDS]
 
-    matcher.add("SKILLS", None, *skill_patterns)
-    matcher.add("EXPERIENCE", None, *experience_patterns)
-    matcher.add("RESPONSIBILITIES", None, *responsibility_patterns)
+#     matcher.add("SKILLS", None, *skill_patterns)
+#     matcher.add("EXPERIENCE", None, *experience_patterns)
+#     matcher.add("RESPONSIBILITIES", None, *responsibility_patterns)
 
-    skills, experience, responsibilities = [], [], []
+#     skills, experience, responsibilities = [], [], []
 
-    for sent in doc.sents:
-        matches = matcher(sent)
-        for match_id, start, end in matches:
-            match_label = nlp.vocab.strings[match_id]
-            if match_label == "SKILLS":
-                skills.append(sent.text.strip())
-            elif match_label == "EXPERIENCE":
-                experience.append(sent.text.strip())
-            elif match_label == "RESPONSIBILITIES":
-                responsibilities.append(sent.text.strip())
+#     for sent in doc.sents:
+#         matches = matcher(sent)
+#         for match_id, start, end in matches:
+#             match_label = nlp.vocab.strings[match_id]
+#             if match_label == "SKILLS":
+#                 skills.append(sent.text.strip())
+#             elif match_label == "EXPERIENCE":
+#                 experience.append(sent.text.strip())
+#             elif match_label == "RESPONSIBILITIES":
+#                 responsibilities.append(sent.text.strip())
 
-    skills = list(dict.fromkeys(skills))
-    experience = [item for item in dict.fromkeys(experience) if item not in skills]
-    responsibilities = [
-        item for item in dict.fromkeys(responsibilities)
-        if item not in skills and item not in experience
-    ]
+#     skills = list(dict.fromkeys(skills))
+#     experience = [item for item in dict.fromkeys(experience) if item not in skills]
+#     responsibilities = [
+#         item for item in dict.fromkeys(responsibilities)
+#         if item not in skills and item not in experience
+#     ]
 
-    return {
-        "skills": list(dict.fromkeys(skills)),
-        "experience": list(dict.fromkeys(experience)),
-        "responsibilities": list(dict.fromkeys(responsibilities)),
-    }
+#     return {
+#         "skills": list(dict.fromkeys(skills)),
+#         "experience": list(dict.fromkeys(experience)),
+#         "responsibilities": list(dict.fromkeys(responsibilities)),
+#     }
 
 # Apply custom CSS for white font color
 st.markdown(
@@ -181,59 +181,59 @@ if jd_text:
 
     # import pandas as pd
 
-    elif feature == "Extract Details":
-    # Title
-        st.header("Extract Details from JD")
+    # elif feature == "Extract Details":
+    # # Title
+    #     st.header("Extract Details from JD")
 
-        # Ensure JD text is available
-        if jd_text.strip():
-            # Extract details using NER
-            details = extract_with_ner(jd_text)
+    #     # Ensure JD text is available
+    #     if jd_text.strip():
+    #         # Extract details using NER
+    #         details = extract_with_ner(jd_text)
 
-            # Prepare DataFrame for display
-            data = {
-                "Category": [],
-                "Text": []
-            }
-            for skill in details["skills"]:
-                data["Category"].append("Skill")
-                data["Text"].append(skill)
-            for experience in details["experience"]:
-                data["Category"].append("Experience")
-                data["Text"].append(experience)
-            for responsibility in details["responsibilities"]:
-                data["Category"].append("Responsibility")
-                data["Text"].append(responsibility)
+    #         # Prepare DataFrame for display
+    #         data = {
+    #             "Category": [],
+    #             "Text": []
+    #         }
+    #         for skill in details["skills"]:
+    #             data["Category"].append("Skill")
+    #             data["Text"].append(skill)
+    #         for experience in details["experience"]:
+    #             data["Category"].append("Experience")
+    #             data["Text"].append(experience)
+    #         for responsibility in details["responsibilities"]:
+    #             data["Category"].append("Responsibility")
+    #             data["Text"].append(responsibility)
 
-            # Convert data to a DataFrame
-            df = pd.DataFrame(data)
+    #         # Convert data to a DataFrame
+    #         df = pd.DataFrame(data)
 
-            # Add dropdown for category selection
-            st.subheader("Select Category")
-            selected_category = st.selectbox(
-                "Filter by category:",
-                options=["All", "Skill", "Experience", "Responsibility"]
-            )
+    #         # Add dropdown for category selection
+    #         st.subheader("Select Category")
+    #         selected_category = st.selectbox(
+    #             "Filter by category:",
+    #             options=["All", "Skill", "Experience", "Responsibility"]
+    #         )
 
-            # Filter DataFrame based on selection
-            if selected_category != "All":
-                filtered_df = df[df["Category"] == selected_category]
-            else:
-                filtered_df = df
+    #         # Filter DataFrame based on selection
+    #         if selected_category != "All":
+    #             filtered_df = df[df["Category"] == selected_category]
+    #         else:
+    #             filtered_df = df
 
-            # Display the filtered data
-            st.write("### Extracted Information")
-            st.table(filtered_df)
+    #         # Display the filtered data
+    #         st.write("### Extracted Information")
+    #         st.table(filtered_df)
 
-            # Provide a download option for the data
-            st.download_button(
-                label="Download Extracted Details as CSV",
-                data=filtered_df.to_csv(index=False),
-                file_name="extracted_details.csv",
-                mime="text/csv"
-            )
-        else:
-            st.error("No Job Description text provided.")
+    #         # Provide a download option for the data
+    #         st.download_button(
+    #             label="Download Extracted Details as CSV",
+    #             data=filtered_df.to_csv(index=False),
+    #             file_name="extracted_details.csv",
+    #             mime="text/csv"
+    #         )
+    #     else:
+    #         st.error("No Job Description text provided.")
 
 
 
