@@ -129,7 +129,7 @@ st.markdown(
     unsafe_allow_html=True,
 )
 
-st.title("JD Summarizer and Comparator")
+st.title("Job Description Summarizer and Comparator")
 
 # Sidebar for inputs
 st.sidebar.title("JD Input")
