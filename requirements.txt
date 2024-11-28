@@ -6,3 +6,5 @@ transformers
 chardet
 PyPDF2
 sentence-transformers
+spacy==3.6.1
+
