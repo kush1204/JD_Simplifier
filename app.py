@@ -182,7 +182,7 @@ similarity_tokenizer = AutoTokenizer.from_pretrained(similarity_model_name, cach
 similarity_model = AutoModel.from_pretrained(similarity_model_name, cache_dir=model_cache_dir)
 
 # Load spaCy NER model
-@st.cache_resource
+
 def load_spacy_model():
     try:
         nlp = spacy.load("en_core_web_sm")
