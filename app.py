@@ -7,6 +7,10 @@ import spacy
 from spacy.matcher import PhraseMatcher
 from pathlib import Path
 import pandas as pd
+import subprocess
+
+
+
 
 # Set up cache directories for models
 model_cache_dir = Path("./models")
@@ -23,17 +27,18 @@ similarity_tokenizer = AutoTokenizer.from_pretrained(similarity_model_name, cach
 similarity_model = AutoModel.from_pretrained(similarity_model_name, cache_dir=model_cache_dir)
 
 # Load spaCy NER model
-@st.cache_resource
+
 def load_spacy_model():
     try:
-        nlp = spacy.load("en_core_web_sm")
+        nlp = spacy.load("en_core_web_trf")
     except OSError:
-        import subprocess
-        subprocess.run(["python", "-m", "spacy", "download", "en_core_web_sm"])
-        nlp = spacy.load("en_core_web_sm")
+        # Install the model if it's not already installed
+        subprocess.run(["python", "-m", "spacy", "download", "en_core_web_trf"], check=True)
+        nlp = spacy.load("en_core_web_trf")
     return nlp
 
 nlp = load_spacy_model()
+
 
 # Pre-defined lists for NER matching
 SKILL_KEYWORDS = ["skill", "qualification", "requirement", "proficiency", "knowledge", "expertise"]
