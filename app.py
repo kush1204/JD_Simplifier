@@ -150,7 +150,10 @@
 #     sections = extract_with_ner(jd_text)
 #     return sections
 
-
+import os
+os.environ["CUDA_VISIBLE_DEVICES"] = ""
+from thinc.api import prefer_cpu
+prefer_cpu()
 import streamlit as st
 from transformers import AutoTokenizer, AutoModelForSeq2SeqLM, AutoModel
 from sklearn.metrics.pairwise import cosine_similarity
