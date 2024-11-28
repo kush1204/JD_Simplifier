@@ -30,11 +30,11 @@ similarity_model = AutoModel.from_pretrained(similarity_model_name, cache_dir=mo
 
 def load_spacy_model():
     try:
-        nlp = spacy.load("en_core_web_trf")
+        nlp = spacy.load("en_core_web_sm")
     except OSError:
         # Install the model if it's not already installed
-        subprocess.run(["python", "-m", "spacy", "download", "en_core_web_trf"], check=True)
-        nlp = spacy.load("en_core_web_trf")
+        subprocess.run(["python", "-m", "spacy", "download", "en_core_web_sm"], check=True)
+        nlp = spacy.load("en_core_web_sm")
     return nlp
 
 nlp = load_spacy_model()
