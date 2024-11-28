@@ -162,6 +162,10 @@ import spacy
 from spacy.matcher import PhraseMatcher
 from pathlib import Path
 import pandas as pd
+import subprocess
+
+
+
 
 # Set up cache directories for models
 model_cache_dir = Path("./models")
@@ -183,12 +187,13 @@ def load_spacy_model():
     try:
         nlp = spacy.load("en_core_web_sm")
     except OSError:
-        import subprocess
-        subprocess.run(["python", "-m", "spacy", "download", "en_core_web_sm"])
+        # Install the model if it's not already installed
+        subprocess.run(["python", "-m", "spacy", "download", "en_core_web_sm"], check=True)
         nlp = spacy.load("en_core_web_sm")
     return nlp
 
 nlp = load_spacy_model()
+
 
 # Pre-defined lists for NER matching
 SKILL_KEYWORDS = ["skill", "qualification", "requirement", "proficiency", "knowledge", "expertise"]
