@@ -152,8 +152,7 @@
 
 import os
 os.environ["CUDA_VISIBLE_DEVICES"] = ""
-from thinc.api import prefer_cpu
-prefer_cpu()
+os.environ["USE_GPU"] = "0"
 import streamlit as st
 from transformers import AutoTokenizer, AutoModelForSeq2SeqLM, AutoModel
 from sklearn.metrics.pairwise import cosine_similarity
