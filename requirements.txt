@@ -7,4 +7,5 @@ chardet==5.1.0
 PyPDF2>=3.0.0
 sentence-transformers>=2.2.0
 spacy==3.2.0
+pydantic
 
